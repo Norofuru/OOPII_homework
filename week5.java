@@ -1,8 +1,11 @@
 import javax.swing.*;
+import javax.swing.JTextField.*;
 import java.awt.event.*;
 
 class calculator extends JFrame implements ActionListener{
     private JPanel panel;
+    private JTextField text1;
+    private int n;
 
     calculator(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -14,7 +17,7 @@ class calculator extends JFrame implements ActionListener{
         setContentPane(panel);
         panel.setLayout(null);
 
-        JTextField text1 = new JTextField("");
+        text1 = new JTextField("");
         text1.setBounds(10, 10, 270, 30);
         panel.add(text1);
 
@@ -64,34 +67,88 @@ class calculator extends JFrame implements ActionListener{
         panel.add(btn9);
 
         JButton btn0 = new JButton("0");
-        btn0.setBounds(110, 270, 70, 70);
+        btn0.setBounds(110, 270, 70, 30);
         btn0.addActionListener(this);
         panel.add(btn0);
 
-        JButton btn11 = new JButton("+");
+        JButton btn11 = new JButton(" + ");
         btn11.setBounds(20, 270, 70, 30);
-        btn11.addActionListener(this);
+        btn11.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                text1.setText(math(text1.getText()));
+            }
+        });
         panel.add(btn11);
 
-        JButton btn12 = new JButton("-");
+        JButton btn12 = new JButton(" - ");
         btn12.setBounds(20, 310, 70, 30);
-        btn12.addActionListener(this);
+        btn12.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                text1.setText(math(text1.getText()));
+            }
+        });
         panel.add(btn12);
 
-        JButton btn13 = new JButton("*");
+        JButton btn13 = new JButton(" * ");
         btn13.setBounds(200, 270, 70, 30);
-        btn13.addActionListener(this);
+        btn13.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                text1.setText(math(text1.getText()));
+            }
+        });
         panel.add(btn13);
 
-        JButton btn14 = new JButton("/");
+        JButton btn14 = new JButton(" / ");
         btn14.setBounds(200, 310, 70, 30);
-        btn14.addActionListener(this);
+        btn14.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                text1.setText(math(text1.getText()));
+            }
+        });
         panel.add(btn14);
+
+        JButton btn15 = new JButton(" = ");
+        btn15.setBounds(110, 310, 70, 30);
+        btn15.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                text1.setText(math(text1.getText()));
+            }
+        });
+        panel.add(btn15);
     }
 
     public void actionPerformed(ActionEvent e){
         JButton name = (JButton)e.getSource();
-        JOptionPane.showMessageDialog(null, name.getText());
+        text1.setText(text1.getText() + word(name.getText()));
+    }
+
+    private String word(String n){
+        return n;
+    }
+
+    private String math(String m){
+        String[] b = m.split(" ");
+        int e = Integer.parseInt(b[0]);
+        String s = "";
+        for(String a : b){
+            if(a == "+"){
+                int g = n + e;
+                s = String.valueOf(g);
+            } else if(a == "-"){
+                int g = n - e;
+                s = String.valueOf(g);
+            } else if(a == "*"){
+                int g = n * e;
+                s = String.valueOf(g);
+            } else if(a == "/"){
+                float g = n / e;
+                s = String.valueOf(g);
+            } else {
+                s = n;
+            }
+
+        }
+        return s;
     }
 }
 

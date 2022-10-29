@@ -6,12 +6,13 @@ class calculator extends JFrame implements ActionListener{
     private JPanel panel;
     private JTextField text1;
     private int n;
+    private int choice;
 
     calculator(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("Calculator");
         setBounds(100, 100, 300, 400);
-        setVisible(true);
+        
 
         panel = new JPanel();
         setContentPane(panel);
@@ -75,7 +76,10 @@ class calculator extends JFrame implements ActionListener{
         btn11.setBounds(20, 270, 70, 30);
         btn11.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                text1.setText(math(text1.getText()));
+                n = Integer.parseInt(text1.getText());
+                choice = 1;
+                text1.setText("");
+                //text1.setText(math(text1.getText()));
             }
         });
         panel.add(btn11);
@@ -84,7 +88,9 @@ class calculator extends JFrame implements ActionListener{
         btn12.setBounds(20, 310, 70, 30);
         btn12.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                text1.setText(math(text1.getText()));
+                n = Integer.parseInt(text1.getText());
+                choice = 2;
+                text1.setText("");
             }
         });
         panel.add(btn12);
@@ -93,7 +99,9 @@ class calculator extends JFrame implements ActionListener{
         btn13.setBounds(200, 270, 70, 30);
         btn13.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                text1.setText(math(text1.getText()));
+                n = Integer.parseInt(text1.getText());
+                choice = 3;
+                text1.setText("");
             }
         });
         panel.add(btn13);
@@ -102,7 +110,9 @@ class calculator extends JFrame implements ActionListener{
         btn14.setBounds(200, 310, 70, 30);
         btn14.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                text1.setText(math(text1.getText()));
+                n = Integer.parseInt(text1.getText());
+                choice = 1;
+                text1.setText("");
             }
         });
         panel.add(btn14);
@@ -115,6 +125,8 @@ class calculator extends JFrame implements ActionListener{
             }
         });
         panel.add(btn15);
+
+        setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e){
@@ -127,28 +139,19 @@ class calculator extends JFrame implements ActionListener{
     }
 
     private String math(String m){
-        String[] b = m.split(" ");
-        int e = Integer.parseInt(b[0]);
-        String s = "";
-        for(String a : b){
-            if(a == "+"){
-                int g = n + e;
-                s = String.valueOf(g);
-            } else if(a == "-"){
-                int g = n - e;
-                s = String.valueOf(g);
-            } else if(a == "*"){
-                int g = n * e;
-                s = String.valueOf(g);
-            } else if(a == "/"){
-                float g = n / e;
-                s = String.valueOf(g);
-            } else {
-                s = n;
-            }
-
+        int answer = 0;
+        int num = Integer.parseInt(m);
+        switch(choice){
+            case 1:
+                answer = n + num;
+            case 2:
+                answer = n - num;
+            case 3:
+                answer = n * num;
+            case 4:
+                answer = n / num;
         }
-        return s;
+        return Integer.toString(answer);
     }
 }
 

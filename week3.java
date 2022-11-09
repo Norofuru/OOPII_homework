@@ -3,8 +3,8 @@ import java.security.SecureRandom;
 class system implements Runnable{
 
     static int ticket = 10000;
-    int tTicket;
-    static int tQuantity;
+    int tTicket; //已購買票數
+    static int tQuantity; //單次購買量
     Thread t;
     static SecureRandom random = new SecureRandom();
 
@@ -16,12 +16,12 @@ class system implements Runnable{
     }
 
     public void run(){
-        synchronized(this){
+        // synchronized(this){
             while(buyTicket() == true){
                 tTicket += tQuantity;
             }
             System.out.println(t.getName() + "共賣了" + tTicket + "張票");
-        }
+        //}
     }
 
     synchronized private static boolean buyTicket(){ 

@@ -7,8 +7,11 @@ public class week201 {
         SecureRandom random = new SecureRandom();
 
         System.out.println("電腦從1~100的整數中，亂數取出10個不重複的號碼......");
-        for(int i = 0; i < 10; i++){
+        for(int i = 1; i <= 10; i++){
             int num = 1 + random.nextInt(100);
+            while(treeSet.contains(num)){
+                num = 1 + random.nextInt(100);
+            }
             treeSet.add(num);
             System.out.printf("第%d個號碼：%d\n", i, num);
         }
